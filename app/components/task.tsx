@@ -4,14 +4,15 @@ import {
   CheckCircleIcon,
 } from "@heroicons/react/24/solid";
 
-interface TaskProps {
+export interface TaskProps {
   id: number;
   title: string;
   description: string;
   status: "pending" | "completed";
+  onDelete: () => void;
 }
 
-export default function Task({ title, description, status }: TaskProps) {
+export default function Task({ title, description, status, onDelete }: TaskProps) {
   return (
     <div className="flex flex-row rounded-md border-black border p-2 m-2 ">
       <div className="flex flex-col flex-1">
@@ -19,7 +20,7 @@ export default function Task({ title, description, status }: TaskProps) {
         <p className="text-sm">{description}</p>
       </div>
       <div className="flex flex-row items-center space-x-2">
-        <div className="flex flex-col text-xs">
+        <div className="flex flex-col text-xs text-center items-center">
           {status == "pending" ? (
             <>
               <EllipsisHorizontalIcon className="size-6 text-blue-500" />
@@ -34,7 +35,7 @@ export default function Task({ title, description, status }: TaskProps) {
         </div>
         <div
           className="w-auto"
-          onClick={() => console.log("Delete task clicked")}
+          onClick={onDelete}
         >
           <XCircleIcon className="size-6 text-red-500" />
         </div>

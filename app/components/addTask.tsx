@@ -19,6 +19,7 @@ export default function AddTask() {
 
   return (
     <div className="border border-black rounded-lg w-full p-2 m-2">
+      <p className="text-sm w-full border-b border-b-black">Create a New Task</p>
       <input
         className="p-2 w-full"
         type="text"
