@@ -5,9 +5,9 @@ import Button from "./components/button";
 import QuickAdd from "./components/quickAdd";
 
 const tasks = [
-  { title: "shopping", description: "shopping on 5th Ave" },
-  { title: "homework", description: "science homework e=mc2" },
-  { title: "clean house", description: "deep clean kitchen" },
+  { id: 0, title: "shopping", description: "shopping on 5th Ave" },
+  { id: 1, title: "homework", description: "science homework e=mc2" },
+  { id: 2, title: "clean house", description: "deep clean kitchen" },
 ];
 
 export default function Home() {
@@ -21,7 +21,8 @@ export default function Home() {
         {tasks.map((task, index) => {
           return (
             <Task
-              key={index}
+              key={task.id}
+              id={task.id}
               title={task.title}
               description={task.description}
             />
