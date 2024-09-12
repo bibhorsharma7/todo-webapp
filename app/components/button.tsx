@@ -1,14 +1,17 @@
 interface ButtonProps {
   name: string;
-  onClick?: () => void;
+  className?: string;
+  onClick: () => void;
 }
-export default function Button({ name, onClick }: ButtonProps) {
+
+
+export default function Button({ name, onClick, className }: ButtonProps) {
   return (
     <div
-      className="p-2 rounded-md cursor-pointer border-black bg-blue-800 text-white hover:bg-blue-900"
-      onClick={() => onClick}
+      className={`${className ?? ''} text-center rounded-md cursor-pointer border-black bg-green-800 text-white hover:bg-green-700`}
+      onClick={onClick}
     >
-      <p className="capitalize">{name}</p>
+      {name}
     </div>
   );
 }
