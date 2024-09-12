@@ -1,4 +1,5 @@
 interface TaskProps {
+  id: number;
   title: string;
   description: string;
 }
@@ -10,12 +11,12 @@ export default function Task({ title, description }: TaskProps) {
         <p className="text-bold text-md">{title}</p>
         <p className="text-sm">{description}</p>
       </div>
-      <div className="w-auto flex flex-row">
+      <div className="w-auto flex flex-row" onClick={() => console.log("Delete task clicked")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill="bg-red-400"
-          className="w-6 h-6"
+          fill="#eb3434"
+          className="w-6 h-6 hover:cursor-pointer"
         >
           <path
             fill-rule="evenodd"
