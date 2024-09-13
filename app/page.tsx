@@ -15,16 +15,34 @@ export default function Home() {
   const [tasks, setTasks] = useState<TaskList[]>([]);
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    // set tasks if its not empty
+    console.log("setting local storage");
+    if (tasks.length > 0) localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   useEffect(() => {
     const stored = localStorage.getItem("tasks") || "";
-
     if (stored) {
       setTasks(JSON.parse(stored) || []);
     }
   }, []);
+
+  const onDeleteTask = (task: TaskList) => {
+    const filteredTasks = tasks.filter((t) => t.id !== task.id);
+    setTasks(filteredTasks);
+  };
+
+  const onToggleTask = (id: string, status: "pending" | "completed") => {
+    const updatedTasks = tasks.map((t) => {
+      if (t.id == id && status == "completed") {
+        t.status = "pending";
+      } else if (t.id == id && status == "pending") {
+        t.status = "completed";
+      }
+      return t;
+    });
+    setTasks(updatedTasks);
+  };
 
   return (
     <div className="flex flex-1 flex-col items-center pt-20">
@@ -44,23 +62,8 @@ export default function Home() {
               description={task.description}
               tasks={tasks}
               setTasks={setTasks}
-              onDelete={() => {
-                const ntasks = tasks.filter((t) => t.id !== task.id);
-                setTasks(ntasks);
-              }}
-              onToggle={() => {
-                const ntasks = tasks.map((t) => {
-                  if (t.id == task.id) {
-                    if (task.status == "completed") {
-                      t.status = "pending";
-                    } else {
-                      t.status = "completed";
-                    }
-                  }
-                  return t;
-                });
-                setTasks(ntasks);
-              }}
+              onDelete={() => onDeleteTask(task)}
+              onToggle={() => onToggleTask(task.id, task.status)}
             />
           );
         })}

@@ -4,7 +4,6 @@ import {
   PencilSquareIcon,
 } from "@heroicons/react/24/solid";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
-
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { TaskList } from "../page";
 import EditTask from "./editTask";

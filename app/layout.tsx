@@ -27,7 +27,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen dark:bg-white bg-white dark:text-black text-black`}
       >
-        <div className="w-full flex h-12 bg-orange-100 items-center justify-center text-xl font-serif font-bold">
+        <div className="w-full flex h-16 bg-orange-100 items-center justify-center text-xl font-serif font-bold">
           ToDos App
         </div>
         {children}

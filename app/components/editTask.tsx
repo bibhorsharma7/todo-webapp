@@ -13,7 +13,6 @@ export default function EditTask({
   id,
   title,
   description,
-  status,
   tasks,
   setTasks,
   setShowModal,
@@ -28,13 +27,13 @@ export default function EditTask({
       return;
     }
 
-    const ntasks = tasks.map((task) => {
+    const updatedTaskList = tasks.map((task) => {
       if (task.id == id) {
         return { ...task, title: eTitle, description: eDescription };
       }
       return task;
     });
-    setTasks(ntasks);
+    setTasks(updatedTaskList);
     setShowModal(false);
   }
 
