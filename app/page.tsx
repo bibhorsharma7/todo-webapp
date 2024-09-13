@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTask from "./components/addTask";
 import Task from "./components/task";
 
-interface TaskList {
-  id: number;
+export interface TaskList {
+  id: string;
   title: string;
   description: string;
   status: "pending" | "completed";
@@ -13,19 +13,23 @@ interface TaskList {
 
 
 export default function Home() {
-  const taskList: TaskList[] = [
-    { id: 0, title: "shopping", status: "pending", description: "shopping on 5th Ave" },
-    { id: 1, title: "homework", status: "pending", description: "science homework e=mc2" },
-    { id: 2, title: "clean house", status: "completed", description: "deep clean kitchen" },
-  ];
+  // get from local storage
+  const stored = localStorage.getItem("tasks") || ''
+  let taskList: TaskList[] = [];
+  if (stored && stored !== '') {
+    taskList = JSON.parse(stored) || []
+  }
 
   const [tasks, setTasks] = useState(taskList);
 
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   return (
     <div className="flex flex-1 flex-col items-center pt-20">
       <div className="flex flex-row p-2 m-2">
-        <AddTask />
+        <AddTask setTasks={setTasks} />
       </div>
       <div className="m-8 p-10 w-2/5">
         {tasks.map((task) => {
@@ -38,6 +42,19 @@ export default function Home() {
               description={task.description}
               onDelete={() => {
                 const ntasks = tasks.filter(t => t.id !== task.id)
+                setTasks(ntasks)
+              }}
+              onToggle={() => {
+                const ntasks = tasks.map(t => {
+                  if (t.id == task.id) {
+                    if (task.status == "completed") {
+                      t.status = "pending"
+                    } else {
+                      t.status = "completed"
+                    }
+                  }
+                  return t
+                })
                 setTasks(ntasks)
               }}
             />

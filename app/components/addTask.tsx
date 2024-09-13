@@ -1,20 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Button from "./button";
+import { TaskList } from "../page";
 
-export default function AddTask() {
+interface AddTaskProps {
+  setTasks: Dispatch<SetStateAction<TaskList[]>>;
+}
+
+export default function AddTask({ setTasks } : AddTaskProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const handleAddTask = () => {
     // input validation
-    if (title.length == 0) {
-      alert("Title cannot be empty");
+    if (title.trim().length == 0) {
+      alert("Error: Title cannot be empty");
       return;
     }
 
-    alert(`create clicked\nTitle: ${title}\nDescription: ${description}`);
+    // random id
+    const num = Math.floor(Math.random() * 100)
+
+    const stored = localStorage.getItem('tasks') || ''
+    let tasks: TaskList[] = stored == '' ? [] : (JSON.parse(stored) || [])
+    
+    tasks.push({
+      id: num.toString() + title,
+      title: title,
+      status: "pending",
+      description: description,
+    })
+
+    setTasks(tasks)
   };
 
   return (
