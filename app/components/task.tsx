@@ -1,9 +1,9 @@
 import {
   XCircleIcon,
-  CheckBadgeIcon,
+  CheckBadgeIcon as CheckSolid,
   PencilSquareIcon,
 } from "@heroicons/react/24/solid";
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
+import { CheckBadgeIcon as CheckOutline } from "@heroicons/react/24/outline";
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { TaskList } from "../page";
 import EditTask from "./editTask";
@@ -76,12 +76,9 @@ export default function Task({
         </TaskControl>
         <TaskControl label={status}>
           {status == "pending" ? (
-            <ArrowPathIcon onClick={onToggle} className="size-7 text-black" />
+            <CheckOutline onClick={onToggle} className="size-7 text-black" />
           ) : (
-            <CheckBadgeIcon
-              onClick={onToggle}
-              className="size-7 text-blue-500"
-            />
+            <CheckSolid onClick={onToggle} className="size-7 text-blue-500" />
           )}
         </TaskControl>
         <TaskControl label="Delete">
