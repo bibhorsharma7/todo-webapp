@@ -1,27 +1,13 @@
 import {
-  EllipsisHorizontalIcon,
   XCircleIcon,
-  CheckCircleIcon,
+  CheckBadgeIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/solid";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
+
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { TaskList } from "../page";
 import EditTask from "./editTask";
-
-function TaskControl({
-  children,
-  label,
-}: {
-  children: ReactNode;
-  label: string;
-}) {
-  return (
-    <div className="flex flex-col items-center text-slate-400 ">
-      {children}
-      <p className="capitalize">{label}</p>
-    </div>
-  );
-}
 
 export interface TaskProps {
   id: string;
@@ -32,6 +18,21 @@ export interface TaskProps {
   setTasks: Dispatch<SetStateAction<TaskList[]>>;
   onDelete: () => void;
   onToggle: () => void;
+}
+
+function TaskControl({
+  children,
+  label,
+}: {
+  children: ReactNode;
+  label: string;
+}) {
+  return (
+    <div className="flex flex-col items-center text-slate-400 hover:cursor-pointer">
+      {children}
+      <p className="capitalize">{label}</p>
+    </div>
+  );
 }
 
 export default function Task({
@@ -51,10 +52,10 @@ export default function Task({
   }
 
   return (
-    <div className="flex flex-row rounded-md border-black border p-2 m-2 ">
+    <div className="flex flex-row rounded-md border-black border p-2">
       <div className="flex flex-col flex-1">
-        <p className="text-bold text-md">{title}</p>
-        <p className="text-sm">{description}</p>
+        <p className="text-bold text-md font-serif">{title}</p>
+        <p className="text-xs">{description}</p>
       </div>
       {showModal && (
         <EditTask
@@ -71,19 +72,16 @@ export default function Task({
         <TaskControl label="Edit">
           <PencilSquareIcon
             onClick={onEdit}
-            className="size-7 text-yellow-200"
+            className="size-7 text-slate-600"
           />
         </TaskControl>
         <TaskControl label={status}>
           {status == "pending" ? (
-            <EllipsisHorizontalIcon
+            <ArrowPathIcon onClick={onToggle} className="size-7 text-black" />
+          ) : (
+            <CheckBadgeIcon
               onClick={onToggle}
               className="size-7 text-blue-500"
-            />
-          ) : (
-            <CheckCircleIcon
-              onClick={onToggle}
-              className="size-7 text-green-600"
             />
           )}
         </TaskControl>

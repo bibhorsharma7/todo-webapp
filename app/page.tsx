@@ -12,27 +12,28 @@ export interface TaskList {
 }
 
 export default function Home() {
-  // get from local storage
-  const stored = localStorage.getItem("tasks") || "";
-  let taskList: TaskList[] = [];
-  if (stored && stored !== "") {
-    taskList = JSON.parse(stored) || [];
-  }
-
-  const [tasks, setTasks] = useState(taskList);
+  const [tasks, setTasks] = useState<TaskList[]>([]);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  useEffect(() => {
+    const stored = localStorage.getItem("tasks") || "";
+
+    if (stored) {
+      setTasks(JSON.parse(stored) || []);
+    }
+  }, []);
+
   return (
     <div className="flex flex-1 flex-col items-center pt-20">
-      <div className="flex flex-col p-2 m-2">
-        <h1 className="text-md font-bold">New To-Do</h1>
+      <div className="flex flex-col w-2/5">
+        <h1 className="text-md font-bold">Add New Task</h1>
         <AddTask setTasks={setTasks} />
       </div>
-      <div className="m-8 p-10 w-2/5">
-        <h1 className="text-md font-bold">To Dos:</h1>
+      <div className="m-8 p-10 w-2/5 space-y-2">
+        {tasks.length > 0 && <h1 className="text-md font-bold">To Dos:</h1>}
         {tasks.map((task) => {
           return (
             <Task

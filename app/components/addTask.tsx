@@ -33,7 +33,7 @@ export default function AddTask({ setTasks }: AddTaskProps) {
   };
 
   return (
-    <div className="border border-black rounded-lg w-full p-2 m-2 space-y-2">
+    <div className="border border-black rounded-lg w-full p-2 space-y-2">
       <input
         className="p-2 w-full focus:outline-none border-b rounded-sm border-b-slate-500"
         type="text"
@@ -42,7 +42,7 @@ export default function AddTask({ setTasks }: AddTaskProps) {
         onChange={(e) => setTitle(e.target.value)}
       />
       <textarea
-        className="p-2 w-full rounded-md focus:outline-none focus:outline-1 focus:outline-slate-500"
+        className="p-2 w-full rounded-md text-sm focus:outline-none focus:outline-1 focus:outline-slate-500"
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
