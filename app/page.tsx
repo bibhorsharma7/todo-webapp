@@ -15,7 +15,7 @@ export default function Home() {
   const [tasks, setTasks] = useState<TaskList[]>([]);
 
   useEffect(() => {
-    // set tasks if its not empty
+    // save tasks to local storage if its not empty
     console.log("setting local storage");
     if (tasks.length > 0) localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
