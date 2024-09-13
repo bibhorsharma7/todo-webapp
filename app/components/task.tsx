@@ -4,7 +4,9 @@ import {
   CheckCircleIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/solid";
-import { ReactNode, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { TaskList } from "../page";
+import EditTask from "./editTask";
 
 function TaskControl({
   children,
@@ -26,18 +28,27 @@ export interface TaskProps {
   title: string;
   description: string;
   status: "pending" | "completed";
+  tasks: TaskList[];
+  setTasks: Dispatch<SetStateAction<TaskList[]>>;
   onDelete: () => void;
   onToggle: () => void;
 }
 
 export default function Task({
+  id,
   title,
   description,
   status,
+  tasks,
+  setTasks,
   onDelete,
   onToggle,
 }: TaskProps) {
   const [showModal, setShowModal] = useState(false);
+
+  function onEdit() {
+    setShowModal(true);
+  }
 
   return (
     <div className="flex flex-row rounded-md border-black border p-2 m-2 ">
@@ -45,9 +56,23 @@ export default function Task({
         <p className="text-bold text-md">{title}</p>
         <p className="text-sm">{description}</p>
       </div>
+      {showModal && (
+        <EditTask
+          id={id}
+          title={title}
+          description={description}
+          status={status}
+          tasks={tasks}
+          setTasks={setTasks}
+          setShowModal={setShowModal}
+        />
+      )}
       <div className="flex flex-row align-text-bottom space-x-2 text-xs">
         <TaskControl label="Edit">
-          <PencilSquareIcon className="size-7 text-yellow-200" />
+          <PencilSquareIcon
+            onClick={onEdit}
+            className="size-7 text-yellow-200"
+          />
         </TaskControl>
         <TaskControl label={status}>
           {status == "pending" ? (

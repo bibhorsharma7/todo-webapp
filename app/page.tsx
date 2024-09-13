@@ -41,6 +41,8 @@ export default function Home() {
               title={task.title}
               status={task.status}
               description={task.description}
+              tasks={tasks}
+              setTasks={setTasks}
               onDelete={() => {
                 const ntasks = tasks.filter((t) => t.id !== task.id);
                 setTasks(ntasks);
