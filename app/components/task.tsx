@@ -53,8 +53,8 @@ export default function Task({
   return (
     <div className="flex flex-row rounded-md border-black border p-2">
       <div className="flex flex-col flex-1">
-        <p className="text-bold text-md font-serif">{title}</p>
-        <p className="text-xs">{description}</p>
+        <p className="text-bold text-2xl font-serif">{title}</p>
+        <p className="text-sm">{description}</p>
       </div>
       {showModal && (
         <EditTask
