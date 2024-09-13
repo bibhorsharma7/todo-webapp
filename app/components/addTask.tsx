@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import Button from "./button";
 import { TaskList } from "../page";
+import { v4 as uuid } from "uuid";
 
 interface AddTaskProps {
   setTasks: Dispatch<SetStateAction<TaskList[]>>;
@@ -11,25 +12,28 @@ export default function AddTask({ setTasks }: AddTaskProps) {
   const [description, setDescription] = useState("");
 
   const handleAddTask = () => {
-    // input validation
+    // trim unnecessary whitespaces
     if (title.trim().length == 0) {
       alert("Error: Title cannot be empty");
       return;
     }
 
-    // random id
-    const num = Math.floor(Math.random() * 100);
+    const randomId = uuid();
     const stored = localStorage.getItem("tasks") || "";
-    let tasks: TaskList[] = stored == "" ? [] : JSON.parse(stored) || [];
+    let taskList: TaskList[] = [];
+    if (stored) taskList = JSON.parse(stored) || [];
 
-    tasks.push({
-      id: num.toString() + title.substring(0, 3), // set random two digit number + first 3 characters of the title as id
-      title: title,
+    const newTask: TaskList = {
+      id: randomId,
+      title,
+      description,
       status: "pending",
-      description: description,
-    });
+    };
 
-    setTasks(tasks);
+    taskList.push(newTask);
+    setTasks(taskList);
+    setTitle("");
+    setDescription("");
   };
 
   return (
