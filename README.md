@@ -10,17 +10,22 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the website locally.
 
-## Tech Stack Used
+## Tech Stack and External Libraries
 - Next.js ^14
 - React ^18
+- Typescript
+- Sqlite3
+- Prisma
+- Tremor (UI)
 - tailwindcss
-- typescript
 
 ## Files
 
-Home Page: `app/page.tsx`
-
-Components in `app/components/`
+- Home Page: `app/page.tsx`
+- Backend in: `app/api/`
+- Components in: `app/components/`
+- Tests in: `__test__/`
+- Prisma ORM: `prisma/`
 
 
 ## Node version

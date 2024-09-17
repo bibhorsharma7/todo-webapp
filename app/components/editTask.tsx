@@ -1,74 +1,98 @@
+import { Task } from "../page";
+import { useForm } from "react-hook-form";
+import { Button, Textarea } from "@tremor/react";
+import { fetchTasks, updateTask } from "@/lib/utils";
+import { RiCloseCircleFill } from "@remixicon/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { formSchema, FormValueType } from "./taskForm";
 import { Dispatch, SetStateAction, useState } from "react";
-import { TaskList } from "../page";
-import { XCircleIcon } from "@heroicons/react/24/outline";
-import Button from "./button";
 
-interface EditTaskProps extends TaskList {
-  tasks: TaskList[];
+interface EditTaskProps {
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean;
+  setTodos: Dispatch<SetStateAction<Task[]>>;
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  setTasks: Dispatch<SetStateAction<TaskList[]>>;
 }
 
 export default function EditTask({
   id,
   title,
   description,
-  tasks,
-  setTasks,
+  completed,
+  setTodos,
   setShowModal,
 }: EditTaskProps) {
-  const [eTitle, setETitle] = useState(title);
-  const [eDescription, setEDescription] = useState(description);
+  const [newTitle, setNewTitle] = useState(title);
+  const [newDescription, setNewDescription] = useState(description);
 
-  function handleSave() {
-    // input validation
-    if (eTitle.trim().length == 0) {
-      alert("Error: Title cannot be empty");
-      return;
-    }
+  const handleSave = async () => {
+    // no action if there is no changes
+    if (newTitle == title && newDescription == description) return;
 
-    const updatedTaskList = tasks.map((task) => {
-      if (task.id == id) {
-        return { ...task, title: eTitle, description: eDescription };
-      }
-      return task;
+    await updateTask({
+      id: id,
+      title: newTitle,
+      description: newDescription,
+      completed: completed,
     });
-    setTasks(updatedTaskList);
+
     setShowModal(false);
-  }
+    const tasks = await fetchTasks();
+    setTodos(tasks);
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValueType>({
+    resolver: zodResolver(formSchema),
+  });
 
   return (
-    <div className="absolute top-0 left-0 flex items-center justify-center bg-slate-800/40 w-screen h-screen backdrop-blur-sm">
-      <div className="w-1/2 h-1/2 border border-black bg-white rounded-lg p-4 items-center flex flex-col">
-        <div className="flex w-full flex-row space-betweeen mb-4">
-          <h1 className="text-lg font-bold flex-auto">Edit Task</h1>
-          <XCircleIcon
-            className="size-8 flex-none"
-            onClick={() => setShowModal(false)}
+    <div className="text-black">
+      <div className="flex w-full flex-row space-betweeen mb-8">
+        <h1 className="text-lg font-bold flex-auto">Edit Task</h1>
+        <RiCloseCircleFill
+          color="red"
+          className="size-7 flex-none"
+          onClick={() => setShowModal(false)}
+        />
+      </div>
+      <div className="mt-4">
+        <form onSubmit={handleSubmit(handleSave)}>
+          <p>Title</p>
+          <input
+            {...register("task")}
+            type="text"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            className="focus:outline-none w-full border rounded-md px-2 border-slate-500"
           />
-        </div>
-        <div className="mt-4">
-          <div className="flex flex-row space-x-2">
-            <p>Title</p>
-            <input
-              className="focus:outline-none border rounded-md px-2 border-slate-500"
-              type="text"
-              value={eTitle}
-              onChange={(e) => setETitle(e.target.value)}
-            />
-          </div>
+          {errors.task && (
+            <span className="text-red-600 text-sm">
+              {errors.task.message as string}
+            </span>
+          )}
           <div>
             <p>Description</p>
-            <textarea
-              className="p-1 w-full rounded-md focus:outline-none border border-slate-500"
-              value={eDescription}
-              onChange={(e) => setEDescription(e.target.value)}
+            <Textarea
+              {...register("description")}
+              className="rounded-md"
+              value={newDescription}
+              placeholder="Description... (optional)"
+              onChange={(e) => setNewDescription(e.target.value)}
             />
           </div>
-          <div>
-            <Button name="Save" onClick={handleSave} />
-          </div>
-        </div>
+          <Button
+            type="submit"
+            className="mt-10 px-1 w-full bg-blue-500 text-white hover:bg-blue-700"
+          >
+            Update Task
+          </Button>
+        </form>
       </div>
     </div>
   );
