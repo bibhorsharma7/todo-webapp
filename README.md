@@ -1,11 +1,11 @@
 ## To Do List Web-App
 
-To run the web application locally:
-
+To run the web application locally after cloning the repo:
 ```bash
 npm install
 # then
-npm run dev
+
+npm run build && npm run start # build and run locally
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the website locally.
@@ -26,6 +26,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Components in: `app/components/`
 - Tests in: `__test__/`
 - Prisma ORM: `prisma/`
+- helpers: `lib/`
 
 
 ## Node version
