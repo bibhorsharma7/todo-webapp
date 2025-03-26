@@ -4,6 +4,7 @@ import { fetchTasks } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import FormContainer from "./containers/formContainer";
 import TasksContainer from "./containers/tasksContainer";
+import { signIn } from "next-auth/react";
 
 export interface Task {
   id: string;
@@ -25,6 +26,12 @@ export default function Home() {
 
   return (
     <div className="flex flex-1 flex-col items-center pt-20">
+      <button
+        className="border rounded-lg text-white text-center px-6 py-2 bg-blue-800"
+        onClick={() => signIn("google")}
+      >
+        Sign In
+      </button>
       <FormContainer setTodos={setTodos} />
       <TasksContainer todos={todos} setTodos={setTodos} />
     </div>
