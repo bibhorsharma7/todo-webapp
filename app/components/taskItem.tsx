@@ -55,27 +55,27 @@ export default function TaskItem({
   return (
     <div
       className={cx(
-        "flex flex-row rounded-md border-black border p-2",
-        completed ? "line-through text-slate-300" : "",
+        "flex flex-row rounded-md border border-black p-2",
+        completed ? "text-slate-300 line-through" : "",
       )}
     >
       <div
-        className="flex flex-col flex-1 hover:cursor-pointer"
+        className="flex flex-1 flex-col hover:cursor-pointer"
         onClick={() => setShowModal(true)}
       >
-        <p className="text-bold text-2xl font-serif">{title}</p>
+        <p className="text-bold font-serif text-2xl">{title}</p>
         <p className="text-sm">{description}</p>
       </div>
 
       <DialogHero />
 
-      <div className="flex flex-row align-text-bottom space-x-2 text-xs">
+      <div className="flex flex-row space-x-2 align-text-bottom text-xs">
         <TaskControl>
           <Button
             icon={RiPencilFill}
             onClick={() => setShowModal(true)}
             tooltip="Edit task"
-            className="size-7 text-slate-600 bg-slate-100 hover:bg-slate-300 border-0"
+            className="size-7 border-0 bg-slate-100 text-slate-600 hover:bg-slate-300"
           />
         </TaskControl>
         <TaskControl>
@@ -89,7 +89,7 @@ export default function TaskItem({
           <Button
             icon={RiCloseCircleFill}
             onClick={onDelete}
-            className="size-7 text-red-600 bg-slate-100 hover:bg-slate-300 border-0"
+            className="size-7 border-0 bg-slate-100 text-red-600 hover:bg-slate-300"
             tooltip="Delete task"
           />
         </TaskControl>

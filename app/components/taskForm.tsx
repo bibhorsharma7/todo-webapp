@@ -42,7 +42,7 @@ export default function TaskForm({
     <div className="w-full">
       <form
         onSubmit={handleSubmit(handleAddTask)}
-        className="w-full p-2 space-y-4"
+        className="w-full space-y-4 p-2"
       >
         <TextInput
           {...register("task")}
@@ -50,10 +50,10 @@ export default function TaskForm({
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full rounded-md "
+          className="w-full rounded-md"
         />
         {errors.task && (
-          <span className="text-red-600 text-sm">
+          <span className="text-sm text-red-600">
             {errors.task.message as string}
           </span>
         )}
@@ -67,7 +67,7 @@ export default function TaskForm({
         <div className="flex flex-row-reverse">
           <Button
             type="submit"
-            className="px-1 w-full bg-blue-500 text-white hover:bg-blue-700"
+            className="w-full bg-blue-500 px-1 text-white hover:bg-blue-700"
           >
             Add
           </Button>

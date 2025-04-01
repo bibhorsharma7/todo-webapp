@@ -53,8 +53,8 @@ export default function EditTask({
 
   return (
     <div className="text-black">
-      <div className="flex w-full flex-row space-betweeen mb-8">
-        <h1 className="text-lg font-bold flex-auto">Edit Task</h1>
+      <div className="space-betweeen mb-8 flex w-full flex-row">
+        <h1 className="flex-auto text-lg font-bold">Edit Task</h1>
         <RiCloseCircleFill
           color="red"
           className="size-7 flex-none"
@@ -69,10 +69,10 @@ export default function EditTask({
             type="text"
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
-            className="focus:outline-none w-full border rounded-md px-2 border-slate-500"
+            className="w-full rounded-md border border-slate-500 px-2 focus:outline-none"
           />
           {errors.task && (
-            <span className="text-red-600 text-sm">
+            <span className="text-sm text-red-600">
               {errors.task.message as string}
             </span>
           )}
@@ -88,7 +88,7 @@ export default function EditTask({
           </div>
           <Button
             type="submit"
-            className="mt-10 px-1 w-full bg-blue-500 text-white hover:bg-blue-700"
+            className="mt-10 w-full bg-blue-500 px-1 text-white hover:bg-blue-700"
           >
             Update Task
           </Button>

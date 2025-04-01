@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div className="flex flex-1 flex-col items-center pt-20">
       <button
-        className="border rounded-lg text-white text-center px-6 py-2 bg-blue-800"
+        className="rounded-lg border bg-blue-800 px-6 py-2 text-center text-white"
         onClick={() => signIn("google")}
       >
         Sign In

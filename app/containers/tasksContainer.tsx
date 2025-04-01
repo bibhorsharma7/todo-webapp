@@ -24,7 +24,7 @@ export default function TasksContainer({
   };
 
   return (
-    <div className="m-8 p-10 w-4/5 space-y-2">
+    <div className="m-8 w-4/5 space-y-2 p-10">
       {todos && todos.length > 0 && (
         <h1 className="text-md font-bold">To Dos:</h1>
       )}
