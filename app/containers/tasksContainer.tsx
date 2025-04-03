@@ -28,20 +28,22 @@ export default function TasksContainer({
       {todos && todos.length > 0 && (
         <h1 className="text-md font-bold">To Dos:</h1>
       )}
-      {todos.map((task) => {
-        return (
-          <TaskItem
-            key={task.id}
-            id={task.id}
-            title={task.title}
-            completed={task.completed}
-            description={task.description}
-            setTasks={setTodos}
-            onDelete={() => onDeleteTask(task.id)}
-            onToggle={() => onToggleStatus(task)}
-          />
-        );
-      })}
+      {todos &&
+        todos.length > 0 &&
+        todos.map((task) => {
+          return (
+            <TaskItem
+              key={task.id}
+              id={task.id}
+              title={task.title}
+              completed={task.completed}
+              description={task.description}
+              setTasks={setTodos}
+              onDelete={() => onDeleteTask(task.id)}
+              onToggle={() => onToggleStatus(task)}
+            />
+          );
+        })}
     </div>
   );
 }
