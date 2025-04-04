@@ -25,9 +25,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-1 flex-col items-center pt-20">
+    <div className="container flex flex-1 flex-col items-center pt-10 sm:pt-20">
       <button
-        className="rounded-lg border bg-blue-800 px-6 py-2 text-center text-white"
+        className="rounded-lg border bg-blue-800 px-4 py-2 text-center text-white sm:px-6 sm:py-2"
         onClick={() => signOut()}
       >
         Sign Out
