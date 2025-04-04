@@ -25,15 +25,20 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container flex flex-1 flex-col items-center pt-10 sm:pt-20">
-      <button
-        className="rounded-lg border bg-blue-800 px-4 py-2 text-center text-white sm:px-6 sm:py-2"
-        onClick={() => signOut()}
-      >
-        Sign Out
-      </button>
-      <FormContainer setTodos={setTodos} />
-      <TasksContainer todos={todos} setTodos={setTodos} />
+    <div className="flex min-h-screen flex-col bg-gray-50 text-gray-800 antialiased dark:bg-gray-900 dark:text-gray-100">
+      <div className="flex h-16 w-full items-center justify-between bg-gradient-to-r from-orange-400 to-orange-600 px-6 text-2xl font-extrabold text-white shadow-md">
+        <span>ToDos App</span>
+        <button
+          className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-blue-700"
+          onClick={() => signOut()}
+        >
+          Sign Out
+        </button>
+      </div>
+      <div className="container flex flex-1 flex-col items-center pt-10 sm:pt-20">
+        <FormContainer setTodos={setTodos} />
+        <TasksContainer todos={todos} setTodos={setTodos} />
+      </div>
     </div>
   );
 }

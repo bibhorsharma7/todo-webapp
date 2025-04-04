@@ -24,9 +24,11 @@ export default function TasksContainer({
   };
 
   return (
-    <div className="m-4 w-full space-y-2 p-4 sm:m-8 sm:w-4/5 sm:p-10">
+    <div className="shadow-card m-6 w-full space-y-4 rounded-lg bg-white p-6 sm:m-10 sm:w-4/5 sm:p-12 dark:bg-gray-800">
       {todos && todos.length > 0 && (
-        <h1 className="text-md responsive-text font-bold">To Dos:</h1>
+        <h1 className="responsive-text text-lg font-bold text-gray-800 dark:text-gray-100">
+          To Dos:
+        </h1>
       )}
       {todos &&
         todos.length > 0 &&
