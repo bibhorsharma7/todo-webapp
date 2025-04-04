@@ -22,7 +22,7 @@ function SignInButton({
 
 export default function SignIn() {
   return (
-    <div className="flex flex-1 items-center justify-center bg-gradient-to-b from-gray-100 to-gray-300 p-6 dark:from-gray-800 dark:to-gray-900">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-100 to-gray-300 p-6 dark:from-gray-800 dark:to-gray-900">
       <div className="flex h-auto w-full max-w-sm flex-col items-center justify-center space-y-6 rounded-lg bg-white p-8 shadow-2xl dark:bg-gray-800">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
           Sign In
